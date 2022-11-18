@@ -4,7 +4,6 @@ import { useFonts, Roboto_400Regular, Roboto_500Medium, Roboto_700Bold } from '@
 import { Loading } from './src/components/Loading';
 import { AuthContextProvider } from "./src/contexts/AuthContext";
 import { Routes } from "./src/routes";
-import { Find } from "./src/screens/Find";
 
 export default function App() {
   const [fontsLoaded] = useFonts({Roboto_400Regular, Roboto_500Medium, Roboto_700Bold})
@@ -13,7 +12,7 @@ export default function App() {
     <NativeBaseProvider theme={THEME}>
       <AuthContextProvider>
         <StatusBar barStyle="light-content" backgroundColor="transparent" translucent />
-        {fontsLoaded ? <Find /> : <Loading />}
+        {fontsLoaded ? <Routes /> : <Loading />}
       </AuthContextProvider>
     </NativeBaseProvider>
   );
