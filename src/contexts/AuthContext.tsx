@@ -49,11 +49,10 @@ export function AuthContextProvider({ children } : AuthProviderProps){
     async function signInWithGoogle(access_token: string) {
         try {
             setIsUserLoading(true)  
-            const tokenResponse = await api.post('/user', { access_token })
-            // console.log(tokenResponse.data)
+            const tokenResponse = await api.post('/users', { access_token })
             api.defaults.headers.common['Authorization'] = `Bearer ${tokenResponse.data.token}`;
             const userInfoResponse = await api.get('/me');
-            console.log(userInfoResponse.data)
+            setUser(userInfoResponse.data)
         } catch (error) {
             console.log(error);
             throw error;
