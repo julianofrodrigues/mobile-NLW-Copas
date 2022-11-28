@@ -1,13 +1,16 @@
 import { Box, FlatList, useToast } from 'native-base';
 import { useEffect, useState } from 'react';
 import { api } from '../services/api';
+import { EmptyMyPoolList } from './EmptyMyPoolList';
 import { Game, GameProps } from './Game';
+import { Loading } from './Loading';
 
 interface Props {
   poolId: string;
+  code: string;
 }
 
-export function Guesses({ poolId }: Props) {
+export function Guesses({ poolId, code }: Props) {
 
   const [isLoading, setIsLoading] = useState(true);  
   const toast = useToast();
@@ -33,12 +36,44 @@ export function Guesses({ poolId }: Props) {
   }
 
   async function handleGuessConfirm(gameId: string) {
-    
+    try {
+      if(!firstTeamPoints.trim() || secondTeamPoints.trim()){
+        return toast.show({
+            title: 'Informe o placar do palpite',
+            placement: 'top',
+            bgColor: 'red.500'
+          }) 
+      }
+
+      await api.post(`/pools/${poolId}/games/guesses`, {
+        firstTeamPoints: Number(firstTeamPoints),
+        secondTeamPoints: Number(secondTeamPoints)
+      })
+
+      toast.show({
+        title: 'Palpite realizado com sucesso',
+        placement: 'top',
+        bgColor: 'green.500'
+      }); 
+
+      fetchGames();
+    } catch (error) {
+      console.log(error)
+      toast.show({
+          title: 'Não foi possivel enviar os palpites',
+          placement: 'top',
+          bgColor: 'red.500'
+      })
+    }
   }
 
   useEffect(() => {
     fetchGames()
   }, [poolId])
+
+  if(isLoading){
+    return <Loading />
+  }
 
   return (
     <FlatList
@@ -49,9 +84,11 @@ export function Guesses({ poolId }: Props) {
             data={item}
             setFirstTeamPoints={setFirstTeamPoints}
             setSecondTeamPoints={setSecondTeamPoints}
-            onGuessConfirm={() => {}}
+            onGuessConfirm={() => handleGuessConfirm(item.id)}
           />
         )}
+        _contentContainerStyle={{ pb: 10 }}
+        ListEmptyComponent={() => <EmptyMyPoolList code={code} />}
      />
   );
 }
