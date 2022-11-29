@@ -37,15 +37,15 @@ export function Guesses({ poolId, code }: Props) {
 
   async function handleGuessConfirm(gameId: string) {
     try {
-      if(!firstTeamPoints.trim() || secondTeamPoints.trim()){
+      if(!firstTeamPoints.trim() || !secondTeamPoints.trim()){
         return toast.show({
             title: 'Informe o placar do palpite',
             placement: 'top',
             bgColor: 'red.500'
           }) 
       }
-
-      await api.post(`/pools/${poolId}/games/guesses`, {
+      
+      await api.post(`/pools/${poolId}/games/${gameId}/guesses`, {
         firstTeamPoints: Number(firstTeamPoints),
         secondTeamPoints: Number(secondTeamPoints)
       })
