@@ -4,7 +4,6 @@ import { Header } from "../components/Header";
 import { Input } from "../components/Input";
 import { Button } from "../components/Button";
 import { useState } from "react";
-import { Alert } from "react-native";
 import { api } from "../services/api";
 
 export function New(){
