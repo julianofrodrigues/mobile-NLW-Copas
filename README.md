@@ -2,8 +2,8 @@
 
 # Project Summary
 Mobile from the NLW Cups project, where you can see registered pools, games and predictions, in addition to making your predictions 🏃🏻‍♂️ <br>
-The back-end is at this repository: come here<br>
-The front-end project is in this other repository: come here
+The back-end is at this repository: https://github.com/julianofrodrigues/backEnd-NLW-Copas<br>
+The front-end project is in this other repository: https://github.com/julianofrodrigues/frontEnd-NLW-Copas
 
 ## Application images below 
 <details> <summary> Click Here to see screenshots </summary>
