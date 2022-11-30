@@ -1,4 +1,4 @@
-<h1 align="center"> 🥅 e-Sport-Front-End </h1>
+<h1 align="center"> 🥅 NLW-Copas-Mobile </h1>
 
 # Project Summary
 Mobile from the NLW Cups project, where you can see registered pools, games and predictions, in addition to making your predictions 🏃🏻‍♂️ <br>
